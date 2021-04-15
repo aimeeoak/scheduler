@@ -5,8 +5,8 @@ import { action } from "@storybook/addon-actions";
 
 import "index.scss";
 
-import "./components/DayListItem";
-import "./components/DayList";
+import DayListItem from "../src/components/DayListItem";
+import DayList from "../src/components/DayList";
 
 import Button from "components/Button";
 
