@@ -9,6 +9,8 @@ import DayListItem from "../src/components/DayListItem";
 import DayList from "../src/components/DayList";
 import InterviewerListItem from "../src/components/InterviewerListItem";
 import InterviewerList from "../src/components/InterviewerList";
+import index from "../src/components/Appointment/Index";
+import Header from "../src/components/Appointment/Header";
 import Button from "components/Button";
 
 
@@ -143,6 +145,10 @@ storiesOf("Button", module)
     </Button>
   ));
 
+
+// ----
+
+
   storiesOf("DayListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -153,3 +159,14 @@ storiesOf("Button", module)
   .add("Clickable", () => (
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> 
   ));
+
+
+// ----
+
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment time="12pm" />)
+  .add("Header", () => <Header time="12pm" />)

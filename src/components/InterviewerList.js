@@ -3,7 +3,26 @@ import classNames from "classnames";
 
 import "components/InterviewerList.scss";
 
-<section className="interviewers">
-  <h4 className="interviewers__header text--light">Interviewer</h4>
-  <ul className="interviewers__list"></ul>
-</section>
+export function ListItem(props) {
+  const itemClass = `list__item${
+    props.selected ? "list__item--selected" : ""
+  }`;
+  return (
+    <li className={itemClass} onClick={props.setItem}>
+      {props.label}
+    </li>
+  );
+}
+
+export function List(props) {
+  const items = props.item.map(item => (
+    <ListItem
+    key={item.id}
+    labal={item.label}
+    selected={item.id === props.item}
+    setItem={(event) => props.setItem(item.id)}
+
+    />
+  ));
+  return <ul>{items}</ul>;
+}
