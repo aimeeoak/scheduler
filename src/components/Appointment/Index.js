@@ -1,14 +1,17 @@
 import React from "react";
-import classNames from "classnames";
+import Header from "components/Appointment/Header"
 
-export function Appointment(props) {
-    const itemClass = `--/${
-      props.selected ? "--selected" : ""
-    }`;
-    return (
-      <li className={itemClass} onClick={props.setItem}>
-        {props.label}
-      </li>
-    );
-    return <article className="appointment"></article>;
-  }
+import "./styles.scss"
+
+const Appointment = (props) => {
+  return(
+    <article className="appointment">
+      <Header 
+      time={props.time}
+      />
+      {props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer} /> : <Empty />}
+    </article>
+  )
+}
+
+export default Appointment; 
