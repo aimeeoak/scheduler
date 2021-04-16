@@ -1,15 +1,68 @@
 import React, { useState } from "react";
 import "components/Application.scss";
 
-import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
-import InterviewerListItem from "components/InterviewerListItem";
-import InterviewerList from "components/InterviewerList";
-import Appointment from "components/Appointment/Index";
-import Header from "components/Appointment/Header";
-import Error from "components/Appointment/Error";
-import Show from "components/Appointment/show";
-import Button from "components/Button";
+import Appointment from "components/Appointment/index";
+
+
+const appointments = [
+  {
+    id: 1,
+    time: "12pm",
+  },
+  {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Peregrin Took",
+      interviewer: {
+        id: 3,
+        name: "Gandalf the Grey",
+        avatar: "https://i.imgur.com/T2WwVfS.png",
+      }
+    }
+  },
+
+  {
+    id: 3,
+    time: "101m",
+    interview: {
+      student: "Aragorn, son of Arathorn",
+      interviewer: {
+        id: 2,
+        name: "Samwise Gamgee",
+        avatar: "https://i.imgur.com/Nmx0Qxo.png",
+      }
+    }
+  },
+
+  {
+    id: 4,
+    time: "6pm",
+    interview: {
+      student: "Bilbo Baggins",
+      interviewer: {
+        id: 5,
+        name: "Thorin Oakenshield",
+        avatar: "https://i.imgur.com/twYrpay.jpg",
+      }
+    }
+  },
+
+  {
+    id: 5,
+    time: "2am",
+    interview: {
+      student: "Frodo Baggins",
+      interviewer: {
+        id: 4,
+        name: "Gollum",
+        avatar: "https://i.imgur.com/FK8V841.jpg",
+      }
+    }
+  }
+];
+
 
 const days = [
   {
@@ -31,34 +84,27 @@ const days = [
 
 console.log("testApp")
 
-export default function Application(props) {
-  const [day, setDay] = useState("Monday");
+const Application = (props) => {
+  const [day, setDay] = useState("Monday")
+  const theScheduler = appointments.map(appt => {
+    return(
+      <Appointment  
+      key={appt.id}
+      {...appt}
+      />
+    )
+  })
   return (
     <main className="layout">
       <section className="sidebar">
-      <img
-        className="sidebar--centered"
-        src="images/logo.png"
-        alt="Interview Scheduler"
-      />
-      <hr className="sidebar__separator sidebar--centered" />
-      <nav className="sidebar__menu">
-      <DayList
-        days={days}
-        day={"Monday"}
-        setDay={day => console.log(day)}
-      />
-      </nav>
-      <img
-        className="sidebar__lhl sidebar--centered"
-        src="images/lhl.png"
-        alt="Lighthouse Labs"
-      />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        {theScheduler}
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
 }
+
+export default Application;
 
