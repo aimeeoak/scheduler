@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "components/Application.scss";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import DayList from "components/DayList";
-import Appointment from "components/Appointment/index";
+import Appointment from "components/Appointment/Index";
 
 
 const appointments = [
@@ -64,23 +64,17 @@ const appointments = [
 ];
 
 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
+const [days, setDays] = useState([]);
+
+useEffect(() => {
+  Promise.all([
+    axios.get("http://localhost:8001/api/days"),
+    axios.get("http://localhost:8001/api/appointments"),
+    axios.get("http://localhost:8001/api/interviewers"),
+  ]).then((all) => {
+    setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
+  });
+}, []);
 
 console.log("testApp")
 
