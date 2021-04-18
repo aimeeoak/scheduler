@@ -64,7 +64,22 @@ const appointments = [
 ];
 
 
-const [days, setDays] = useState([]);
+const Application = (props) => {
+const setDay = day => setState({ ...state, day });
+const setDays = (days) => {
+  setState(prev => ({ ...prev, days }));
+}
+
+
+useEffect(() => {
+  const url = "http://localhost:8001/api/days"
+  axios.get(url)
+    .then((response) => {
+      // console.log(response)
+      setDays([...response.data])
+    })
+}, [day])
+}, [state.day])
 
 useEffect(() => {
   Promise.all([
