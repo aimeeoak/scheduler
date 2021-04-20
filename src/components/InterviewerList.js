@@ -2,27 +2,24 @@ import React from "react";
 import classNames from "classnames";
 
 import "components/InterviewerList.scss";
+import InterviewerListItem from "components/InterviewerListItem";
 
-export function ListItem(props) {
-  const itemClass = `list__item${
-    props.selected ? "list__item--selected" : ""
-  }`;
+export default function InterviewerList(props) {
+  const interviewers = props.interviewers.map(interviewer => {
+    return (
+      <InterviewerListItem
+        key={interviewer.id}
+        name={interviewer.name}
+        avatar={interviewer.avatar}
+        selected={interviewer.id === props.interviewer}
+        setInterviewer={event => props.setInterviewer(interviewer.id)}
+      />
+    );
+  })
   return (
-    <li className={itemClass} onClick={props.setItem}>
-      {props.label}
-    </li>
-  );
-}
-
-export function List(props) {
-  const items = props.item.map(item => (
-    <ListItem
-    key={item.id}
-    labal={item.label}
-    selected={item.id === props.item}
-    setItem={(event) => props.setItem(item.id)}
-
-    />
-  ));
-  return <ul>{items}</ul>;
-}
+    <section className="interviewers">
+      <h4 className="interviewers__header text--light">Interviewer</h4>
+      <ul className="interviewers__list">{interviewers}</ul>
+    </section>
+  )
+};

@@ -4,19 +4,11 @@ import classNames from "classnames";
 import "components/InterviewerListItem.scss";
 
 export default function InterviewerListItem(props) {
-  const interviewers = props.interviewers.map(interviewer => {
-    return (
-      <InterviewerListItem
-        key={interviewer.id}
-        name={interviewer.name}
-        avatar={interviewer.avatar}
-        selected={interviewer.id === props.interviewer}
-        setInterviewer={event => props.setInterviewer(interviewer.id)}
-      />
-    );
-  })
+  const itemClass = `list__item${
+    props.selected ? "list__item--selected" : ""
+  }`;
   return (
-    <li className={interviewerClass} onClick={props.setInterviewer}>
+    <li className={itemClass} onClick={props.setInterviewer}>
       <img
         className="interviewers__item-image"
         src={props.avatar}
@@ -25,4 +17,4 @@ export default function InterviewerListItem(props) {
       {props.selected && props.name}
     </li>
   );
-};
+}
