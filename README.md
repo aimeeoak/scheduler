@@ -4,11 +4,11 @@ Scheduler is an app designed to make it easy to book appointments and interviews
 
 ## Final Product
 
-!["Screenshot of Main Page"](https://github.com/aimeeoak/tinyApp/blob/master/docs/LOGIN.png?raw=true)
+!["Screenshot of Main Page"](https://github.com/aimeeoak/scheduler/blob/master/public/images/InterviewerMain.png?raw=true)
 Main page displaying appointments
-!["Screenshot of URLs Page"](https://github.com/aimeeoak/tinyApp/blob/master/docs/URLS.png?raw=true)
+!["Screenshot of URLs Page"](https://github.com/aimeeoak/scheduler/blob/master/public/images/InterviewerTuesday.png?raw=true)
 Tuesday's page with open slots
-!["Screenshot of New URL page"](https://github.com/aimeeoak/tinyApp/blob/master/docs/CREATE-NEW.png?raw=true)
+!["Screenshot of New URL page"](https://github.com/aimeeoak/scheduler/blob/master/public/images/InterviewerDelete.png?raw=true)
 Deleting an appointment
 
 ## Dependencies
