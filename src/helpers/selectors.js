@@ -7,7 +7,7 @@ const getApptsByDay = (state, day) => {
   return appts;
 };
 
-const getInt = (state, interview) => {
+const getInterview = (state, interview) => {
   if (!interview) {
     return null;
   }
@@ -19,7 +19,7 @@ const getInt = (state, interview) => {
   return intObj;
 };
 
-const getIntsByDay = (state, day) => {
+const getInterviewersByDay = (state, day) => {
   const dayObj = state.days.find((x) => x.name === day);
   if (!dayObj) {
     return [];
@@ -28,4 +28,4 @@ const getIntsByDay = (state, day) => {
   return interviewers;
 };
 
-module.exports = { getApptsByDay, getInt, getIntsByDay };
+module.exports = { getApptsByDay, getInterview, getInterviewersByDay };
