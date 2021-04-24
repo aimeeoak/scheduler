@@ -4,19 +4,18 @@ import Header from "components/Appointment/Header";
 import Show from "components/Appointment/show";
 import Empty from "components/Appointment/Empty";
 import Form from "components/Appointment/Form";
-import Confirm from "components/Appointment/Confirm";
-import Status from "./Status";
-import Error from "./Error";
+import Status from "components/Appointment/Status";
 
 import useVisualMode from "hooks/useVisualMode";
 
-
 import "./styles.scss";
+import Confirm from "./Confirm";
+import Error from "./Error";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
-const SAVING = "SAVING"
+const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";

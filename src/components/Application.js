@@ -1,36 +1,44 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "components/Application.scss";
+import React from "react";
+
+//components
 
 import DayList from "components/DayList.js";
 import Appointment from "components/Appointment/Index";
 
+//helpers
 
-import { getApptsByDay, getInterview, getInterviewersByDay } from "helpers/selectors";
+import { getApptsByDay, getInterview, getInterviewersByDay } from "../helpers/selectors";
 
-import useApplicationData from "../hooks/useApplicationData";
+//hooks
 
+import useAppData from "../hooks/useApplicationData";
 
-export default function Application(props) {
-  const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
+//styling
+
+import "components/Application.scss";
+
+const Application = (props) => {
+  const { state, setDay, bookInt, deleteInt } = useAppData();
+
+  const dailyAppts = getApptsByDay(state, state.day);
 
   const interviewers = getInterviewersByDay(state, state.day);
 
-  const appointments = getApptsByDay(state, state.day).map(
-    appointment => {
-      return (
-        <Appointment
-          key={appointment.id}
-          {...appointment}
-          interview={getInterview(state, appointment.interview)}
-          interviewers={interviewers}
-          bookInterview={bookInterview}
-          cancelInterview={cancelInterview}
-        />
-      );
-    }
-  );
-
+  const superSchedule = dailyAppts.map((appt) => {
+    const interview = getInterview(state, appt.interview);
+    return (
+      <Appointment
+        {...appt}
+        key={appt.id}
+        id={appt.id}
+        time={appt.time}
+        interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInt}
+        deleteInterview={deleteInt}
+      />
+    );
+  });
 
   return (
     <main className="layout">
@@ -51,11 +59,11 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        <section className="schedule">
-          {appointments}
-          <Appointment key="last" time="5pm" />
-        </section>
+        {superSchedule}
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
-}
+};
+
+export default Application;

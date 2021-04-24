@@ -28,4 +28,8 @@ const getInterviewersByDay = (state, day) => {
   return interviewers;
 };
 
-module.exports = { getApptsByDay, getInterview, getInterviewersByDay };
+const getDay = (state, day) => state.days.find((x) => x.name === day);
+
+const getAllDays = (state) => state.days;
+
+module.exports = { getApptsByDay, getInterview, getInterviewersByDay, getDay, getAllDays };

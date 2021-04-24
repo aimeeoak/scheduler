@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import axios from "axios";
 
@@ -118,5 +118,5 @@ export default function useApplicationData(){
     return daysArr.map((day) => (day.name === dayObj.name ? dayObj : day));
   };
 
-  return { state, bookInterview, deleteInterview };
+  return { state, setDay, bookInterview, deleteInterview };
 };
