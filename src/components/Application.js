@@ -18,7 +18,7 @@ import useAppData from "../hooks/useApplicationData";
 import "components/Application.scss";
 
 const Application = (props) => {
-  const { state, setDay, bookInt, deleteInt } = useAppData();
+  const { state, setDay, bookInterview, deleteInterview } = useAppData();
 
   const dailyAppts = getApptsByDay(state, state.day);
 
@@ -28,14 +28,13 @@ const Application = (props) => {
     const interview = getInterview(state, appt.interview);
     return (
       <Appointment
-        {...appt}
         key={appt.id}
-        id={appt.id}
+        {...appt}
         time={appt.time}
         interview={interview}
         interviewers={interviewers}
-        bookInterview={bookInt}
-        deleteInterview={deleteInt}
+        bookInterview={bookInterview}
+        deleteInterview={deleteInterview}
       />
     );
   });
