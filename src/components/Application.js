@@ -18,7 +18,7 @@ import useAppData from "../hooks/useApplicationData";
 import "components/Application.scss";
 
 const Application = (props) => {
-  const { state, setDay, bookInterview, deleteInterview } = useAppData();
+  const { state, setDay, updateSpots, bookInterview, deleteInterview } = useAppData();
 
   const dailyAppts = getApptsByDay(state, state.day);
 
@@ -36,7 +36,7 @@ const Application = (props) => {
         bookInterview={bookInterview}
         deleteInterview={deleteInterview}
       />
-    );
+    )
   });
 
   return (
@@ -49,7 +49,11 @@ const Application = (props) => {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={state.days} day={state.day} setDay={setDay} />
+          <DayList 
+          days={state.days} 
+          day={state.day} 
+          setDay={setDay}
+          updateSpots={updateSpots} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -62,7 +66,7 @@ const Application = (props) => {
         <Appointment key="last" time="5pm" />
       </section>
     </main>
-  );
+  )
 };
 
 export default Application;

@@ -1,5 +1,5 @@
 const getApptsByDay = (state, day) => {
-  const dayObj = state.days.find((x) => x.name === day);
+  const dayObj = state.days.find((dayIterable) => dayIterable.name === day);
   if (!dayObj) {
     return [];
   }
@@ -20,7 +20,7 @@ const getInterview = (state, interview) => {
 };
 
 const getInterviewersByDay = (state, day) => {
-  const dayObj = state.days.find((x) => x.name === day);
+  const dayObj = state.days.find((dayIterable) => dayIterable.name === day);
   if (!dayObj) {
     return [];
   }
@@ -28,7 +28,7 @@ const getInterviewersByDay = (state, day) => {
   return interviewers;
 };
 
-const getDay = (state, day) => state.days.find((x) => x.name === day);
+const getDay = (state, day) => state.days.find((dayIterable) => dayIterable.name === day);
 
 const getAllDays = (state) => state.days;
 

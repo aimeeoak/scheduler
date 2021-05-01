@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const useVisualMode = (x) => {
-  const [mode, setMode] = useState(x);
-  const [history, setHistory] = useState([x]);
+const useVisualMode = (modeIterable) => {
+  const [mode, setMode] = useState(modeIterable);
+  const [history, setHistory] = useState([modeIterable]);
 
   const transition = (mode, replace = false) => {
     if (!replace) {
@@ -14,10 +14,10 @@ const useVisualMode = (x) => {
 
   const back = (mode) => {
     if (history.length === 1) {
-      setMode(x);
+      setMode(modeIterable);
     } else {
       setMode(history[history.length - 2]);
-      setHistory([history.slice(0, -1)]);
+      setHistory(prevHistory => [...prevHistory, mode], [history.slice(0, -1)]);
     }
   };
 

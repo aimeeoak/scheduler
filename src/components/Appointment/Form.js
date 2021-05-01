@@ -3,11 +3,13 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 
+// This sets the form
 
 const Form = (props) => {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [name, setName] = useState(props.name || "");
   const [error, setError] = useState("");
+  //This resets the form after an error, in theory but not practice
   const reset = () => {
     setInterviewer(null);
     setName("");
@@ -53,7 +55,7 @@ const Form = (props) => {
         </section>
       </section>
     </main>
-  );
+  )
 };
 
 

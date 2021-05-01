@@ -23,63 +23,43 @@ export default function useApplicationData(){
   }, []);
 
   function bookInterview(id, interview) {
-    console.log("application.js", interview);
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
     // console.log(id, interview);
-    return axios.put(`/api/appointments/${id}`, { interview })
-    .then((response) => {
-      console.log("what's wrong with u", response)
-      if (response.status === 204) {
-        setState({
-          ...state,
-          appointments
-        })
-        console.log("success");
-      }
-    })
-  }
+    return axios.put(`/api/appointments/${id}`, { interview: interview })
+      .then(() => {
+        const appointment = {
+          ...state.appointments[id],
+          interview: {
+            ...interview
+          }
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
 
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
-    };
+        const days = updateSpots(state.day, state.days, appointments);
+
+        setState({ ...state, appointments, days });
+      })
   }
 
   function deleteInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    return axios.delete(`api/appointments/${id}`, {})
-    .then(response => {
-      if(response.status === 204) {
-        setState({
-          ...state,
-          appointments
-        });
-      }
-      console.log("Delete", response)
-    })
-  };
+    return axios.delete(`/api/appointments/${id}`)
+      .then(() => {
+        const appointment = {
+          ...state.appointments[id],
+          interview: null
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
 
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
-    };
-  }
+        const days = updateSpots(state.day, state.days, appointments);
+
+        setState({ ...state, appointments, days })
+      });
+  };
 
   const setDay = day => setState({
     ...state,
@@ -101,22 +81,30 @@ export default function useApplicationData(){
     });
   }, [])
 
-  // using Devin's because mine kept failing
+  const getSpotsForDay = function (dayObj, appointments) {
 
-  const newSpotDayObj = (dayName, days, appointments) => {
-    const dayToUpdate = days.find(day => day.name === dayName);
-    let spotCount = 0;
-    for (let app in appointments) {
-      if (appointments[app].interview === null && dayToUpdate.appointments.includes(appointments[app].id)) {
-        spotCount++
+    let spots = 0;
+    for (const id of dayObj.appointments) {
+      const appointment = appointments[id];
+      if (!appointment.interview) {
+        spots++;
       }
     }
-    return { ...dayToUpdate, spots: spotCount };
-  };
+    return spots;
+  }
 
-  const newDaysArr = (dayObj, daysArr) => {
-    return daysArr.map((day) => (day.name === dayObj.name ? dayObj : day));
-  };
+  const updateSpots = function (dayName, days, appointments) {
+    const dayObj = days.find(x => x.name === dayName);
+    const spots = getSpotsForDay(dayObj, appointments);
+    console.log("am i here?");
+    const newDay = {
+      ...dayObj,
+      spots
+    };
 
-  return { state, setDay, bookInterview, deleteInterview };
+    const newDays = days.map(day => day.name === dayName ? newDay : day);
+
+    return newDays;
+  };
+  return { state, updateSpots, setDay, bookInterview, deleteInterview };
 };
