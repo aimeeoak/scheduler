@@ -13,9 +13,17 @@ Deleting an appointment
 
 ## Dependencies
 
-- axios
-- @testing-library/react-hooks
-- react-test-renderer
+- axios -0.21.1
+- classnames -2.2.6
+- react -16.9.0
+- node-sass -4.14.0
+- npm -7.10.0
+
+for testing
+
+- Storybook -5.0.0
+- Cypress -7.1.0
+- Prop-types -15.7.2
 
 ## Getting Started
 
