@@ -51,7 +51,6 @@ const Appointment = (props) => {
     transition(CONFIRM);
   };
   const cancel = () => {
-    console.log("does this occur");
     transition(EMPTY);
   };
   const edit = () => {
