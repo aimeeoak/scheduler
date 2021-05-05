@@ -51,7 +51,8 @@ const Appointment = (props) => {
     transition(CONFIRM);
   };
   const cancel = () => {
-    transition(SHOW);
+    console.log("does this occur");
+    transition(EMPTY);
   };
   const edit = () => {
     transition(EDIT);
@@ -71,7 +72,7 @@ const Appointment = (props) => {
         />
       )}
       {mode === CREATE && (
-        <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
+        <Form interviewers={props.interviewers} onCancel={cancel} onSave={save} />
       )}
       {mode === SAVING && <Status message="Saving" />}
       {mode === DELETING && <Status message="Deleting" />}
@@ -80,7 +81,7 @@ const Appointment = (props) => {
           onConfirm={deletes}
           onCancel={cancel}
           message="Cancel your appointment?"
-        />)};
+        />)}
       {mode === EDIT && (
         <Form
           interviewers={props.interviewers}

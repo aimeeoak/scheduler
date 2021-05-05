@@ -1,6 +1,6 @@
-# TinyApp Project
+# Scheduler Project
 
-Scheduler is an app designed to make it easy to book appointments and interviews. This was made as an assignment during my time at Lighthouse Labs Web Development Bootcamp. 
+Scheduler is an app designed to make it easy to book appointments and interviews. This was made as an assignment during my time at Lighthouse Labs Web Development Bootcamp. You can make it yourself using [Lighthouse Labs Web Development Bootcamp](https://www.lighthouselabs.ca/). 
 
 ## Final Product
 
@@ -22,6 +22,7 @@ Deleting an appointment
 - Clone project into directory of choice
   - *Please ensure any other severs using Port 8000 are fully shut off before running*
 - Install all dependencies (using the `npm install` command).
+- Navigate to scheduler-api for the scheduler-api, and follow the instructions to run it for filler data to populate the schedule.
 - Run the development web server using the `npm start` command.
 - In your browser of choice, navigate to http://localhost:8000/
 - Have Fun!

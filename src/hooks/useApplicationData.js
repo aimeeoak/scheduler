@@ -13,17 +13,21 @@ export default function useApplicationData(){
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:8001/api/days"),
-      axios.get("http://localhost:8001/api/appointments"),
-      axios.get("http://localhost:8001/api/interviewers"),
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers"),
     ]).then((all) => {
-      console.log(all);
-      setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
+      setState((prev) => ({
+        ...prev,
+        days: all[0].data,
+        appointments: all[1].data,
+        interviewers: all[2].data,
+      }));
     });
   }, []);
+  //function to book the interviews
 
   function bookInterview(id, interview) {
-    // console.log(id, interview);
     return axios.put(`/api/appointments/${id}`, { interview: interview })
       .then(() => {
         const appointment = {
@@ -42,6 +46,8 @@ export default function useApplicationData(){
         setState({ ...state, appointments, days });
       })
   }
+
+  //function to delete the interviews
 
   function deleteInterview(id, interview) {
     return axios.delete(`/api/appointments/${id}`)
@@ -81,6 +87,8 @@ export default function useApplicationData(){
     });
   }, [])
 
+  //function to update spots on sidebar
+
   const getSpotsForDay = function (dayObj, appointments) {
 
     let spots = 0;
@@ -96,7 +104,6 @@ export default function useApplicationData(){
   const updateSpots = function (dayName, days, appointments) {
     const dayObj = days.find(x => x.name === dayName);
     const spots = getSpotsForDay(dayObj, appointments);
-    console.log("am i here?");
     const newDay = {
       ...dayObj,
       spots
