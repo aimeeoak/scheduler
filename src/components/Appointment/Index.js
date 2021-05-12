@@ -40,10 +40,10 @@ const Appointment = (props) => {
   }
 
   const deletes = () => {
-    transition(DELETING);
+    transition(DELETING, true);
     props
       .deleteInterview(props.id)
-      .then(() => transition(CONFIRM))
+      .then(() => transition(EMPTY))
       .catch((error) => transition(ERROR_DELETE, true));
   };
 
